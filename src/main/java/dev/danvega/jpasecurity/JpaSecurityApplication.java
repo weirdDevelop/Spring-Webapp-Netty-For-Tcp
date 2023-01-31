@@ -1,8 +1,6 @@
 package dev.danvega.jpasecurity;
 
-import dev.danvega.jpasecurity.model.Post;
 import dev.danvega.jpasecurity.model.User;
-import dev.danvega.jpasecurity.repository.PostRepository;
 import dev.danvega.jpasecurity.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
