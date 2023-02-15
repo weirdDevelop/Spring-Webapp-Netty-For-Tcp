@@ -31,20 +31,22 @@ public class ProductLoginHandler extends ChannelInboundHandlerAdapter {
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         super.channelRead(ctx, msg);
         String Message=msg.toString();
-        if(Message.startsWith("login "))
-        {
-            String macId=service.macFetch(Message);
-            Optional<Product> product=productRepository.findByMacId(macId);
-            if(product.isPresent())
-            {
-                productDto=new ProductDto(product.get(), ctx.channel());
-                ProductMap.put(productDto);
-                System.out.println(ProductMap.getProductHashMap().size());
-                ctx.writeAndFlush("successfully logged in");
-            }else
-            {
-                ctx.close();
+        if(Message.length()>22) {
+            if (Message.startsWith("login ")) {
+                String macId = service.macFetch(Message);
+                Optional<Product> product = productRepository.findByMacId(macId);
+                if (product.isPresent()) {
+                    productDto = new ProductDto(product.get(), ctx.channel());
+                    ProductMap.put(productDto);
+                    System.out.println(ProductMap.getProductHashMap().size());
+                    ctx.writeAndFlush("successfully logged in");
+                }else {
+                    ctx.close();
+                }
             }
+        }else
+        {
+            ctx.close();
         }
     }
 

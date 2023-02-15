@@ -1,4 +1,6 @@
 package dev.danvega.jpasecurity.model;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 import java.io.Serializable;
@@ -13,12 +15,16 @@ public class Product implements Serializable {
      private int id;
      private String name;
      private String macId;
-     @ManyToOne(optional = false)
+     private boolean activate;
+     private String expirationDate;
+     @ManyToOne(optional = false,fetch = FetchType.LAZY)
      @JoinColumn(name="type_id")
+     @JsonIgnore
      private Type type;
 
      @ManyToOne
      @JoinColumn(name="user_id")
+     @JsonIgnore
      private User user;
 
     public int getId() {
@@ -49,8 +55,33 @@ public class Product implements Serializable {
         return type;
     }
 
+    public boolean isActivate() {
+        return activate;
+    }
+
+    public void setActivate(boolean activate) {
+        this.activate = activate;
+    }
+
+    public String getExpirationDate() {
+        return expirationDate;
+    }
+
+    public void setExpirationDate(String expirationDate) {
+        this.expirationDate = expirationDate;
+    }
+
     public void setType(Type type) {
         this.type = type;
+    }
+
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override
@@ -59,15 +90,10 @@ public class Product implements Serializable {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", macId='" + macId + '\'' +
+                ", activate=" + activate +
+                ", expirationDate='" + expirationDate + '\'' +
                 ", type=" + type +
+                ", user=" + user +
                 '}';
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 }

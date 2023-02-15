@@ -29,22 +29,21 @@ public class use {
     public static final AttributeKey<use> USER_ATTRIBUTE_KEY = AttributeKey.newInstance("USER");
 
 
-
     @Getter
     private final String username;
     private final Channel channel;
 
-    private use(String username, Channel channel){
+    private use(String username, Channel channel) {
         this.username = username;
         this.channel = channel;
     }
 
     public static use of(@NonNull String loginCommand, @NonNull Channel channel) {
         if (loginCommand.startsWith("login ")) {
-            return new use(loginCommand.trim().substring("login ".length()),channel );
+            return new use(loginCommand.trim().substring("login ".length()), channel);
         }
 
-        throw new IllegalArgumentException("loginCommand ["+loginCommand+"] can not be accepted");
+        throw new IllegalArgumentException("loginCommand [" + loginCommand + "] can not be accepted");
     }
 
     public void login(ChannelRepository channelRepository, Channel channel) {
@@ -59,20 +58,22 @@ public class use {
 
     public static use current(Channel channel) {
         use user = channel.attr(USER_ATTRIBUTE_KEY).get();
-        if ( user == null ){
+
+        if (user == null) {
             throw new UserLoggedOutException();
         }
         return user;
     }
 
-    public void tell(Channel targetChannel, @NonNull String username, @NonNull String message) {
+    public static void tell(Channel targetChannel, @NonNull String username, @NonNull String message) {
         if (targetChannel != null) {
-            targetChannel.write(this.username);
+            targetChannel.write(username);
             targetChannel.write(">");
             targetChannel.writeAndFlush(message + "\n\r");
-            this.channel.writeAndFlush("The message was sent to ["+username+"] successfully.\r\n");
-        }else{
-            this.channel.writeAndFlush("No user named with ["+ username +"].\r\n");
+//            channel.writeAndFlush("The message was sent to ["+username+"] successfully.\r\n");
+//        }else{
+//            this.channel.writeAndFlush("No user named with ["+ username +"].\r\n");
+//        }
         }
     }
 }

@@ -35,7 +35,7 @@ import org.springframework.stereotype.Component;
 public class SimpleChatChannelInitializer extends ChannelInitializer<SocketChannel> {
 
     private final SimpleChatServerHandler simpleChatServerHandler;
-    private final LoginHandler loginHandler;
+//    private final LoginHandler loginHandler;
 
     private final ProductLoginHandler productLoginHandler;
     private final StringEncoder stringEncoder = new StringEncoder();

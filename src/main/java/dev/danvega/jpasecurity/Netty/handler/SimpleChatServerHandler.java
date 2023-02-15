@@ -59,13 +59,7 @@ public class SimpleChatServerHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) {
 
-
         String stringMessage = (String) msg;
-        if(stringMessage.startsWith("register "))
-        {
-            ctx.fireChannelRead(msg);
-            return;
-        }
 
         if (log.isDebugEnabled()) {
             log.debug(stringMessage);
