@@ -1,7 +1,6 @@
 # Spring Web Application + Netty for tcp connection
 
-This is a sample project of spring framework and netty integration for implementing a powerful webapp which provides tcp connection for Iot devices.
-this application benefits from :
-Spring boot, Hibernate, Connection pooling, netty, MySQl, Spring Security, Bootstrap, HTML, CSS, JS, JQueery and etc.
+This is a sample project showcasing the integration of the Spring framework and Netty for implementing a powerful web app that provides TCP connections for IoT devices. 
+The application benefits from Spring Boot, Hibernate, connection pooling, Netty, MySQL, Spring Security, Bootstrap, HTML, CSS, JavaScript, jQuery, and more.
 
-Note: test Tcp connection with Hercules.
+Note: Test TCP connection with Hercules
